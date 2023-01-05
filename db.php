@@ -105,8 +105,8 @@ class DataBase {
 
         if(mysqli_num_rows($query_run) > 0)
         {
-            $student = mysqli_fetch_array($query_run);
-            return $student;
+            $result = mysqli_fetch_array($query_run);
+            return $result;
         } 
       }
         public function runqueryforlist($query){
@@ -130,7 +130,7 @@ class DataBase {
          id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
          firstname VARCHAR(255) NOT NULL,
          lastname VARCHAR(255) NOT NULL,
-         email VARCHAR(255) NOT NULL,
+         email VARCHAR(255) NOT NULL UNIQUE,
          `password` VARCHAR(255) NOT NULL
           )";
           $this->runquery($sql1);
