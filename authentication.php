@@ -27,9 +27,7 @@ public function login($data){
 
 }
 
-$data=['firstname'=>'gsw','lastname'=>'jkdci','email'=>'skmlxmo','password'=>'1298'];
-$u=new Authentication();
-$u->register($data);
+
 
 
 ?>

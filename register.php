@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <html>
     <head>
         <style>
@@ -64,21 +67,34 @@ a {
     <p>Please fill in this form to create an account.</p>
     <hr>
     <label for="email"><b>First Name</b></label>
-    <input type="text" placeholder="Enter First Name" name="firstname" id="email" required>
+    <input type="text" name="firstname" placeholder="Enter First Name" id="email" required class="form-control" value="<?php 
+                                if(isset($_SESSION['fname'])){
+                                echo $_SESSION['fname'];}?>">
+                                <?php if (isset($_SESSION['fnameErr'])){?>
+                                    <span class="error">* <?php echo $_SESSION['fnameErr'];?></span> <?php }?>
     <label for="email"><b>Last Name</b></label>
-    <input type="text" placeholder="Enter Last Name" name="lastname" id="email" required>
+    <input type="text" name="lastname" placeholder="Enter Last Name" id="email" required class="form-control" value="<?php 
+                                if(isset($_SESSION['lname'])){
+                                echo $_SESSION['lname'];}?>">
+                                <?php if (isset($_SESSION['lnameErr'])){?>
+                                    <span class="error">* <?php echo $_SESSION['lnameErr'];?></span> <?php }?><br>
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <input type="text" name="email" placeholder="Enter Email" id="email" required class="form-control" value="<?php 
+                                if(isset($_SESSION['email'])){
+                                echo $_SESSION['email'];}?>">
+                                <?php if (isset($_SESSION['emailErr'])){?>
+                                    <span class="error">* <?php echo $_SESSION['emailErr'];?></span> <?php }?><br>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
+    <input type="password" placeholder="Enter Password" name="password" id="psw" required>
+    <?php if (isset($_SESSION['passwordErr'])){?>
+                                    <span class="error">* <?php echo $_SESSION['passwordErr'];?></span> <?php }?><br>
     <label for="psw-repeat"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
     <hr>
 
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-    <button type="submit" class="registerbtn">Register</button>
+    <button type="submit" class="registerbtn" name="save_user">Register</button>
   </div>
 
   <div class="container signin">
@@ -86,4 +102,7 @@ a {
   </div>
 </form>
 </body>
+<?php 
+session_destroy();
+?>
 </html>

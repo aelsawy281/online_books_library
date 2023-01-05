@@ -68,7 +68,7 @@ a {
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-    <button type="submit" class="registerbtn">login</button>
+    <button type="submit"  class="registerbtn">login</button>
   </div>
 </form>
 </body>
