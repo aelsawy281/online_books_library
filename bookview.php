@@ -45,17 +45,10 @@ $book=$b->retrive($id);
                                         </p>
                                     </div>
                                     <div class="mb-3">
-                                        <label>Book Cover</label>
-                                        <p class="form-control">
-                                            <?=$book['cover'];?>
-                                        </p>
+                                        <label>Book Cover</label><br>
+                                        <img src="images/<?php echo $book['cover']; ?>" hight=100 width=30% alt="no photo found">
                                     </div>
-                                    <div class="mb-3">
-                                        <label>book file</label>
-                                        <p class="form-control">
-                                            <?=$book['pathoffile'];?>
-                                        </p>
-                                    </div>
+            
 
                           
                     </div>
