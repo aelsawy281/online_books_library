@@ -33,7 +33,7 @@
                       <h5 class="card-title">Book Name:<?= $book['bookname']; ?>
                                                
                        <p class="card-text"> Price:<td><?= $book['price']; ?></p>
-                         <a href="#" class="btn btn-primary">Go somewhere</a>
+                         <a href="buybook.php" class="btn btn-primary">Buy Now</a>
                          </div>
                         </div><?php
                      }

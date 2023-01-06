@@ -51,8 +51,14 @@ if( $fnameErr !="" or$passwordErr !="" or  $lnameErr !=""){
 else{
 $data=['firstname'=>$fname,'lastname'=>$lname,'email'=>$email,'password'=>$password];
 $a=new Authentication();
-$a->register($data);
-header("location:login.php");
+$result=$a->login($data['email']);
+if($result>0){
+    $result=$a->register($data);
+    header("location:login.php");}
+else{
+   $error="your email is aready exist";
+   $_SESSION['error']=$error;
+   header ("location:register.php");
 }
-
+}
 ?>

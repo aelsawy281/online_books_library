@@ -18,16 +18,35 @@ class Authentication{
                                           }
 
     }
-public function login($email,$password){
+public function login($data){
     //$password= password_hash(12345,PASSWORD_DEFAULT);
-    $query="SELECT * FROM user WHERE email='$email' and password='$password'";
+
+    if(isset($data['email']) and isset($data['password'])){
+        echo $data['email'];
+        $password=$data['password'];
+        $email=$data['email'];
+        $query="SELECT * FROM user WHERE email='$email' and password='$password'";
+        if ($this->db->runquery($this->nameOfDb) === TRUE) {
+        $result=$this->db->runqueryforlogin($query); 
+    }
+}
+    else if(isset($data['email'])){
+        
+        $email=$data['email'];
+        $query="SELECT * FROM user WHERE email='$email'";
+        if ($this->db->runquery($this->nameOfDb) === TRUE) {
+        $result=$this->db->runqueryforlogin($query); 
+    }
+}
+return $result;
+    /*$query="SELECT * FROM user WHERE email='$email' and password='$password'";
     if ($this->db->runquery($this->nameOfDb) === TRUE) {
     $result=$this->db->runqueryforlogin($query);
-    return $result;
+    return $result;*/
     
     }
 }
-}
+
 
 
 

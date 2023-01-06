@@ -61,6 +61,9 @@ a {
         </style>
     </head>
     <body>
+
+    <span style="color:red"><?php if(isset($_SESSION['error'])){
+     echo $_SESSION['error'];   }?></span>
 <form action="handelregister.php" method="post">
   <div class="container">
     <h1>Register</h1>

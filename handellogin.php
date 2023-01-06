@@ -18,8 +18,9 @@ if (isset($_POST['login'])){
         header("location:login.php");}
 
 else{
+    $data=['email'=>$email,'password'=>$password];
 $a=new Authentication();
-$result=$a->login($email,$password);
+$result=$a->login($data);
 if($result>0){
     $_SESSION['email']=$email;
     $_SESSION['password']=$password;
