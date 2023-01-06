@@ -21,6 +21,8 @@ else{
 $a=new Authentication();
 $result=$a->login($email,$password);
 if($result>0){
+    $_SESSION['email']=$email;
+    $_SESSION['password']=$password;
     if($email=='admin@gmail.com'){
         header("location:booklist.php"); 
     } 
