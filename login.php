@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <html>
     <head>
         <style>
@@ -64,12 +67,23 @@ a {
     <p>Please fill in this form to enter our Page</p>
     <hr>
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <input type="text" name="email" placeholder="Enter Email" id="email" required class="form-control" value="<?php 
+                                if(isset($_SESSION['email'])){
+                                echo $_SESSION['email'];}?>">
+                                <?php if (isset($_SESSION['emailErr'])){?>
+                                    <span class="error">* <?php echo $_SESSION['emailErr'];?></span> <?php }
+                                    else if(isset($_SESSION['error'])){?>
+                                        <span class="error">* <?php echo $_SESSION['error'];?></span> <?php }?><br>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-    <button type="submit"  class="registerbtn">login</button>
+    <input type="password" placeholder="Enter Password" name="password" id="psw" required>
+    <?php if (isset($_SESSION['error'])){?>
+                                    <span class="error">* <?php echo $_SESSION['error'];?></span> <?php }?><br>
+    <button type="submit" name="login" class="registerbtn">login</button>
   </div>
 </form>
 </body>
+<?php 
+session_destroy();
+?>
 </html>

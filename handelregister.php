@@ -38,6 +38,7 @@ if (isset($_POST['save_user'])){
         $_SESSION['password']=$password;
   } else {
     $passwordErr="password is not the same as confirm password";
+    $_SESSION['passwordErr']=$passwordErr;
 }
 
 

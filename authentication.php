@@ -9,7 +9,7 @@ class Authentication{
    }
    public function register($data){
     //encrypt password
-    $data['password']= password_hash($data['password'],PASSWORD_DEFAULT);
+    //$data['password']= password_hash($data['password'],PASSWORD_DEFAULT);
     $query = "INSERT INTO user (";            
     $query .= implode(",", array_keys($data)) . ') VALUES (';            
     $query .= "'" . implode("','", array_values($data)) . "')";
@@ -18,14 +18,17 @@ class Authentication{
                                           }
 
     }
-public function login($data){
-    $email=$data['email'];
-    $query="SELECT * FROM book WHERE email=$email";
-    $result=$this->db->runqueryforedit($query);
-    print_r($result) ;
+public function login($email,$password){
+    //$password= password_hash(12345,PASSWORD_DEFAULT);
+    $query="SELECT * FROM user WHERE email='$email' and password='$password'";
+    if ($this->db->runquery($this->nameOfDb) === TRUE) {
+    $result=$this->db->runqueryforlogin($query);
+    return $result;
+    
+    }
+}
 }
 
-}
 
 
 

@@ -100,6 +100,14 @@ class DataBase {
         return $this->conn->error;
            }     
       }
+
+      public function runqueryforlogin($query){
+        $query_run = mysqli_query($this->conn, $query);
+        
+        $row = mysqli_fetch_array($query_run);  
+        $count = mysqli_num_rows($query_run);
+        return $count;
+      }
       public function runqueryforedit($query){
         $query_run = mysqli_query($this->conn, $query);
 
