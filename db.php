@@ -183,6 +183,6 @@ class DataBase {
     }
     
 }  
- $db=new DataBase('localhost','root','') ;
-  $db->create_db('ad');
-  $db->create_table('ad');
+//  $db=new DataBase('localhost','root','') ;
+//   $db->create_db('ad');
+//   $db->create_table('ad');

@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include_once 'db.php';
 class User{
     private $fname;
     private $lname;
@@ -10,18 +10,7 @@ class User{
     public function __construct(){
   
      $this->db=new DataBase('localhost','root','');
-   }/*
-    public function insert($data){ 
-         $query = "INSERT INTO book (";            
-         $query .= implode(",", array_keys($data)) . ') VALUES (';            
-         $query .= "'" . implode("','", array_values($data)) . "')";
- 
-         if ($this->db->runquery($this->nameOfDb) === TRUE) {
-           $this->db->runquery($query);
-        
-                                             }
-
-        }*/
+   }
     public function delete($id){
         $query = "DELETE FROM user WHERE id = $id";
         if ($this->db->runquery($this->nameOfDb) === TRUE) {
@@ -45,9 +34,20 @@ class User{
  
                                       }
       }
-       
-                                              }
 
+      public function retrive($email){
+        $query = "SELECT * FROM user WHERE email = '$email'";
+        if ($this->db->runquery($this->nameOfDb) === TRUE) {
+          $result=$this->db->runqueryforedit($query);
+         return $result;
+                                              }
+  
+    }
+      }
+       
+                                              
+/*
 $u=new User();
-$u->update(2,['email'=>'a']);
+$result=$u->retrive('admin@gmail.com');
+print_r($result);*/
 ?>

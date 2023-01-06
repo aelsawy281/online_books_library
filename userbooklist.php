@@ -1,6 +1,12 @@
 <?php
     session_start();
     include 'book.php';
+    include 'bookuser.php';
+    include 'user.php';
+    $u=new User();
+    $result=$u->retrive($_SESSION['email']);
+    $userId=$result['id'];
+    $_SESSION['user_id']=$userId;
     $b=new book();
    $result=$b->retriveAll();
 ?>
@@ -33,7 +39,17 @@
                       <h5 class="card-title">Book Name:<?= $book['bookname']; ?>
                                                
                        <p class="card-text"> Price:<td><?= $book['price']; ?></p>
-                         <a href="buybook.php" class="btn btn-primary">Buy Now</a>
+                       <?php
+                       $bookUser=new Bookuser();
+                       $result=$bookUser->retrive($userId,$book['id']);
+                        if(isset($result['book_id'])){?>
+                        <a class="btn btn-danger">you bought this book</a>
+                      <?php }
+                      else{
+                       ?> <a href="buybook.php?id=<?= $book['id']; ?>" class="btn btn-primary">Buy Now</a>
+                     <?php }
+                       ?>
+                         
                          </div>
                         </div><?php
                      }
