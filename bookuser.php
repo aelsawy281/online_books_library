@@ -37,7 +37,11 @@ class Bookuser {
 
   }
   public function retriveAll(){
-    $query = "SELECT * FROM book_user WHERE user_id = $id ";
+    $query = "SELECT book_user.id,bookname,price,cover,firstname,lastname,email FROM book_user
+    INNER JOIN user
+     ON user.id = book_user.user_id 
+     INNER JOIN book
+     ON book.id = book_user.book_id" ;
     if ($this->db->runquery($this->nameOfDb) === TRUE) {
       $result=$this->db->runqueryforlist($query);
      return $result;

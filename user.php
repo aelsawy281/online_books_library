@@ -34,6 +34,15 @@ class User{
  
                                       }
       }
+      public function retriveAll(){
+        $query = "SELECT * FROM user WHERE email != 'admin@gmail.com'";
+        if ($this->db->runquery($this->nameOfDb) === TRUE) {
+          $result=$this->db->runqueryforlist($query);
+         return $result;
+                                              }
+  
+    }
+      
 
       public function retrive($email){
         $query = "SELECT * FROM user WHERE email = '$email'";
