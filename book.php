@@ -43,6 +43,13 @@ class Book {
                                             }
 
   }
+  public function retrivebyname($name){
+    $query = "SELECT * FROM book WHERE bookname = '$name'";
+    if ($this->db->runquery($this->nameOfDb) === TRUE) {
+      $result=$this->db->runqueryforedit($query);
+     return $result;
+                                          }
+                                        }
   public function retriveAll(){
     $query = "SELECT * FROM book";
     if ($this->db->runquery($this->nameOfDb) === TRUE) {

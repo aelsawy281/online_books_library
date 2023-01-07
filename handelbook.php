@@ -23,6 +23,7 @@ if (isset($_POST['save_book'])){
   } else {
     $price = test_input($_POST["price"]);
     $_SESSION['price']=$price;
+  }
 
   if (empty($_FILES["cover"])) {
     $cover = "";
@@ -42,7 +43,7 @@ if (isset($_POST['save_book'])){
     $folder="files/$file";
     move_uploaded_file($temfile, $folder);
   }
-}
+
 }
 
 if( $priceErr !="" or  $nameErr !=""){
