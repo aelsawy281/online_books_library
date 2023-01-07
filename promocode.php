@@ -1,6 +1,6 @@
 <?php
 include_once 'db.php';
-class Book {
+class Promocode {
     private $code;
     private $type;
     private $book_id;
@@ -9,7 +9,21 @@ class Book {
     public function __construct(){
      $this->db=new DataBase('localhost','root','');
    }
-    public function insert($data){ 
+   public function generateCode(){
+    $length = 4;
+    $this->code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWSYZ123456789"), 0, $length);
+    return $this->code;
+   }
+    public function insert($data){
+        $result=1;
+        while($result>0){
+            $code=$data['code']= $this->generateCode();
+            $query = "SELECT * FROM promocode WHERE code = '$code'";
+            if ($this->db->runquery($this->nameOfDb) === TRUE) {
+                $result=$this->db->runqueryforlogin($query);
+                
+        }
+    }
          $query = "INSERT INTO promocode (";            
          $query .= implode(",", array_keys($data)) . ') VALUES (';            
          $query .= "'" . implode("','", array_values($data)) . "')";
@@ -17,9 +31,7 @@ class Book {
          if ($this->db->runquery($this->nameOfDb) === TRUE) {
            $this->db->runquery($query);
 
-        
                                              }
-
         }
     public function delete($id){
         $query = "DELETE FROM promocode WHERE id = $id";
@@ -29,8 +41,8 @@ class Book {
                                               }
  
     }
-    public function retrive($id){
-      $query = "SELECT * FROM promocode WHERE id = $id";
+    public function retrive($code){
+      $query = "SELECT * FROM promocode WHERE code = $code";
       if ($this->db->runquery($this->nameOfDb) === TRUE) {
         $result=$this->db->runqueryforedit($query);
        return $result;
@@ -57,5 +69,8 @@ class Book {
                                       }
       }
     }
-       
+/*
+     $p=new Promocode();
+     $data=['type'=>'fixed','value'=>'10'];
+     $p->insert($data);  */
 ?>

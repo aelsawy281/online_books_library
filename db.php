@@ -165,6 +165,7 @@ class DataBase {
         id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         code VARCHAR(255) NOT NULL,
         `type` VARCHAR(255) NOT NULL,
+        `value` float UNSIGNED NOT NULL;
         book_id INT(11) UNSIGNED ,
         FOREIGN KEY (book_id) REFERENCES book(id)
      )";
