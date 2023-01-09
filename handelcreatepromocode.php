@@ -23,7 +23,9 @@ if (isset($_POST['save'])){
     $_SESSION['valueErr']=$valueErr;
   } else {
     $value = test_input($_POST["value"]);
-    $_SESSION['value']=$value;}
+    $_SESSION['value']=$value;
+   
+  }
   
     if (empty($_POST["bookname"])) {
         $booknameErr = "bookname is required";
@@ -39,10 +41,9 @@ if( $typeErr !="" or $valueErr!="" or $booknameErr !=""){
 else{
 $b=new Book();
 $book=$b->retrivebyname($bookname);
-$data=['type'=>'$type','value'=>'$value','book_id'=>$book['id']];
+$data=['type'=>$type,'value'=>$value,'book_id'=>$book['id']];
 $p=new Promocode();
 $p->insert($data);
 header("location:booklist.php");
 }
-
 ?>

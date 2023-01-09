@@ -25,7 +25,7 @@ $result=$b->retriveAll();
                 <div class="card">
                     <div class="card-header">
                         <h4>Promocode Add 
-                            <a href="booklist.php" class="btn btn-danger float-end">BACK</a>
+                            <a href="promocodelist.php" class="btn btn-danger float-end">BACK</a>
                         </h4>
                     </div>
                     <div class="card-body">

@@ -50,7 +50,9 @@ class Promocode {
 
   }
   public function retriveAll(){
-    $query = "SELECT * FROM promocode";
+    $query = "SELECT promocode.id,code,`type`,`value`,bookname FROM promocode
+    INNER JOIN book
+     ON book.id = promocode.book_id ";
     if ($this->db->runquery($this->nameOfDb) === TRUE) {
       $result=$this->db->runqueryforlist($query);
      return $result;
