@@ -1,14 +1,17 @@
 <?php
     session_start();
+    if (!isset($_SESSION['email'])){
+      header("location:login.php");
+    }
     include 'book.php';
-    include 'bookuser.php';
-    include 'user.php';
-    $u=new User();
-    $result=$u->retrive($_SESSION['email']);
-    $userId=$result['id'];
-    $_SESSION['user_id']=$userId;
-    $b=new book();
-   $result=$b->retriveAll();
+      include 'bookuser.php';
+      include 'user.php';
+      $u=new User();
+      $result=$u->retrive($_SESSION['email']);
+      $userId=$result['id'];
+      $_SESSION['user_id']=$userId;
+      $b=new book();
+     $result=$b->retriveAll();
 ?>
 <!doctype html>
 <html lang="en">
@@ -39,16 +42,27 @@
                       <h5 class="card-title">Book Name:<?= $book['bookname']; ?>
                                                
                        <p class="card-text"> Price:<td><?= $book['price']; ?></p>
-                       <?php
-                       $bookUser=new Bookuser();
-                       $result=$bookUser->retrive($userId,$book['id']);
+
+                       <form class="mb-3" action="handeluserbooklist.php?id=<?= $book['id']; ?>" method="post" >
+                             <input type="text" name="promocode" placeholder="promocode">
+                             <input type=number hidden name="price" value="<?= $book['price']; ?>" step=.0000001><br>
+                             <?php if (isset($_SESSION['error'])){
+                              ?>
+                             <span  style="color:red"><?php echo $_SESSION['error'];?></span><br>
+                             <?php }?>
+                             <?php
+                            $bookUser=new Bookuser();
+                           $result=$bookUser->retrive($userId,$book['id']);
                         if(isset($result['book_id'])){?>
-                        <a class="btn btn-danger">you bought this book</a>
+                        <input type="submit" class="btn btn-danger" value="you bought this book">
                       <?php }
                       else{
-                       ?> <a href="buybook.php?id=<?= $book['id']; ?>" class="btn btn-primary">Buy Now</a>
+                       ?> <input type="submit" name="buy" class="btn btn-primary" value="Buy Now">
                      <?php }
                        ?>
+                       </form>
+                       
+                       
                          
                          </div>
                         </div><?php

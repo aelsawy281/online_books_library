@@ -42,7 +42,7 @@ class Promocode {
  
     }
     public function retrive($code){
-      $query = "SELECT * FROM promocode WHERE code = $code";
+      $query = "SELECT * FROM promocode WHERE code = '$code'";
       if ($this->db->runquery($this->nameOfDb) === TRUE) {
         $result=$this->db->runqueryforedit($query);
        return $result;
