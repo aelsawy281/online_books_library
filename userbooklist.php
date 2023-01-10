@@ -46,10 +46,14 @@
                        <form class="mb-3" action="handeluserbooklist.php?id=<?= $book['id']; ?>" method="post" >
                              <input type="text" name="promocode" placeholder="promocode">
                              <input type=number hidden name="price" value="<?= $book['price']; ?>" step=.0000001><br>
-                             <?php if (isset($_SESSION['error'])){
+                             <?php if (isset($_SESSION['error']) and isset($_SESSION['book_id']) ){
+                              if($_SESSION['book_id']==$book['id']){
+
+                              
                               ?>
                              <span  style="color:red"><?php echo $_SESSION['error'];?></span><br>
-                             <?php }?>
+                             <?php }
+                             }?>
                              <?php
                             $bookUser=new Bookuser();
                            $result=$bookUser->retrive($userId,$book['id']);
@@ -78,4 +82,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<?php unset($_SESSION["error"])?>
 </html>

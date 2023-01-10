@@ -25,7 +25,7 @@ if($result>0){
     $_SESSION['email']=$email;
     $_SESSION['password']=$password;
     if($email=='admin@gmail.com'){
-        header("location:booklist.php"); 
+        header("location:index.php"); 
     } 
     else{
         header("location:userbooklist.php");

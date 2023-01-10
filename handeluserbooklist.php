@@ -3,6 +3,7 @@ session_start();
 include 'promocode.php';
 include 'bookuser.php';
 $error="";
+$_SESSION['book_id']=$_GET['id'];
 if(isset($_POST['buy'])){
     $price=$_POST['price'];
     if (isset($_POST['promocode']) and !empty($_POST['promocode'])){
@@ -48,6 +49,7 @@ if(isset($_POST['buy'])){
                 $newprice=$_POST['price'];
                 $userbook=new Bookuser();
                 $bookId=$_GET['id'];
+                $_SESSION['book_id']=$bookId;
                 $userId=$_SESSION['user_id'];
                 $data=['user_id'=>$userId,'book_id'=>$bookId,'price'=>$newprice];
                 $userbook->insert($data);

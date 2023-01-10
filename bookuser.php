@@ -59,11 +59,34 @@ class Bookuser {
  
                                       }
       }
-       
+      public function countbooks(){
+        $query = "SELECT count(DISTINCT(book_id)) as countbooks FROM book_user";
+        if ($this->db->runquery($this->nameOfDb) === TRUE) {
+          $result=$this->db->runqueryforedit($query);
+         return $result;
                                               }
- 
+  
+    }
+    public function countusers(){
+      $query = "SELECT count(DISTINCT(user_id)) as countusers FROM book_user
+      group by user_id";
+      if ($this->db->runquery($this->nameOfDb) === TRUE) {
+        $result=$this->db->runqueryforedit($query);
+       return $result;
+                                            }
+
+  }
+  public function totalprice(){
+    $query = "SELECT sum(price) as totalprice FROM book_user";
+    if ($this->db->runquery($this->nameOfDb) === TRUE) {
+      $result=$this->db->runqueryforedit($query);
+     return $result;
+                                          }
+                                              }
+                                            }
 // $data=['bookname'=>'gvgvx','price'=>43,'cover'=>'kjfc','pathoffile'=>'dfgk'];
-// $b=new Book();
+//$b=new Bookuser();
+// print_r($b->totalprice());
 // //$b->insert($data,'bn');
 // $b->update(3,['file'=>'kkmlhgg']);
 // //$result=$b->retrive(2);

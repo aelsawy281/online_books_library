@@ -52,11 +52,21 @@ class User{
                                               }
   
     }
+    public function countUsers(){
+      $query = "SELECT count(id) FROM user";
+      if ($this->db->runquery($this->nameOfDb) === TRUE) {
+        $result=$this->db->runqueryforedit($query);
+       return $result;
+                                            }
+
+  }
       }
        
                                               
 /*
 $u=new User();
-$result=$u->retrive('admin@gmail.com');
-print_r($result);*/
+$result=$u->countUsers();
+print_r($result);
+*/
+
 ?>
