@@ -156,6 +156,7 @@ class DataBase {
      id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
      user_id INT(11) UNSIGNED NOT NULL,
      book_id INT(11) UNSIGNED NOT NULL,
+     price INT(11) UNSIGNED NOT NULL;
      FOREIGN KEY (user_id) REFERENCES user(id),
      FOREIGN KEY (book_id) REFERENCES book(id)
      )";
@@ -165,7 +166,8 @@ class DataBase {
         id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         code VARCHAR(255) NOT NULL,
         `type` VARCHAR(255) NOT NULL,
-        `value` float UNSIGNED NOT NULL;
+        `value` float UNSIGNED NOT NULL,
+        max_discound INT(11) UNSIGNED,
         book_id INT(11) UNSIGNED ,
         FOREIGN KEY (book_id) REFERENCES book(id)
      )";

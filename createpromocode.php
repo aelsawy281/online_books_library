@@ -33,10 +33,10 @@ $result=$b->retriveAll();
 
                             <div class="mb-3">
                                 <label>Promocode type</label>
-                                <select  name="type" required>
-                                    <option  value="">choose type</option>
+                                <select  name="type"  onchange='toggleDropdown(this);' required id="type">
+                                    <option  value="" selected>choose type</option>
                                     <option   value="fixed">fixed</option>
-                                   <option  value="percentage">percentage</option>
+                                   <option  value="precentage">precentage</option>
                                    
                                </select>
 
@@ -51,6 +51,10 @@ $result=$b->retriveAll();
                                     <span class="error">* <?php echo $_SESSION['valueErr'];?>
                                <?php }?>
                             </div>
+                            <div class="mb-3" id="max_discound">
+                            <label>Max Discound</label>
+                                <input type="number" step=.000000001 class="form-control" name="max_discound">
+                                </div>
                             <div class="mb-3">
                                 <label>Choose a Book to Add Promocode to it:</label>
                                 <select  name="bookname" required>
@@ -82,5 +86,13 @@ $result=$b->retriveAll();
 session_destroy();
 ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const ac = document.getElementById("max_discound");
+      ac.style.display = "none";
+
+    function toggleDropdown(selObj){
+    ac.style.display = selObj.value === "precentage" ? "block" : "none";
+}
+        </script>
 </body>
 </html>

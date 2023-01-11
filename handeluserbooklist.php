@@ -17,25 +17,28 @@ if(isset($_POST['buy'])){
          else{
           $p=new Promocode();
           $result=$p->retrive($code);
-            if($result==null){
+            if($result==null or $result['book_id']!= $_GET['id']){
              $error="code is not correct";
              $_SESSION['error']=$error;
             header("location:userbooklist.php");
                              }
-          else{
+            else if($result['book_id']==$_GET['id']){
          
              if($result['type']=='fixed'){
-            $newprice= $price-$result['value']; 
+             $newprice= $price-$result['value']; 
              
                                          }
             else{
             $discound=(($result['value'])/100)*$price;
-            if($discound>50){
-                $discound=50;  
+            if($discound >$result ['max_discound']){
+                $discound=$result['max_discound'];  
                            }
             $newprice=$price-$discound;
               
                  }
+
+
+                 
                  $userbook=new Bookuser();
                  $bookId=$_GET['id'];
                  $userId=$_SESSION['user_id'];
@@ -46,6 +49,7 @@ if(isset($_POST['buy'])){
               }
             }
             else{
+
                 $newprice=$_POST['price'];
                 $userbook=new Bookuser();
                 $bookId=$_GET['id'];

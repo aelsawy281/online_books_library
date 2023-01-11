@@ -8,6 +8,8 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
+  $type=$bookname="";
+  $value=$max_discound=null;
   $typeErr =$valueErr =$booknameErr ="";
 if (isset($_POST['save'])){
   if (empty($_POST["type"])) {
@@ -16,6 +18,7 @@ if (isset($_POST['save'])){
   } else {
     $type = test_input($_POST["type"]);
     $_SESSION['type']=$type;
+    
   }
 
   if (empty($_POST["value"])) {
@@ -42,6 +45,11 @@ else{
 $b=new Book();
 $book=$b->retrivebyname($bookname);
 $data=['type'=>$type,'value'=>$value,'book_id'=>$book['id']];
+if($type=='precentage'){
+  $max_discound=$_POST['max_discound'];
+  $_SESSION['max_discound']=$max_discound; 
+  $data['max_discound']=$max_discound;
+}
 $p=new Promocode();
 $p->insert($data);
 header("location:booklist.php");
