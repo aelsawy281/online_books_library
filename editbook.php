@@ -3,6 +3,7 @@ session_start();
 $id=$_GET['id'];
 $_SESSION['id']=$id;
 include 'book.php';
+include "category.php";
 $b=new Book();
 $book_edit=$b->retrive($id);
 ?>
@@ -60,6 +61,23 @@ $book_edit=$b->retrive($id);
                             <div class="mb-3">
                             <label>Choose a Book File:</label>
                                 <input type="file" name="file" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                            <label>Choose a Book category:</label>
+                            <select  name="bookcategory" required class="form-control bookcategory">
+                                <option value="" >choose book category</option>
+
+                                <?php
+                                $c=new category();
+                                $result=$c->retriveAll();
+                                        foreach($result as $category)
+                                        {
+                                    
+                                            ?>
+                                    <option  value="<?php echo $category['name'];?>"><?php echo $category['name'];?></option>
+                                   <?php }?>
+                               </select>
+                            
                             </div>
                             <div class="mb-3">
                                 <button type="submit" name="update_book" class="btn btn-primary">Update book</button>

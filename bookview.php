@@ -3,6 +3,7 @@ session_start();
 $id=$_GET['id'];
 $_SESSION['id']=$id;
 include 'book.php';
+include 'category.php';
 $b=new Book();
 $book=$b->retrive($id);
 ?>
@@ -47,6 +48,21 @@ $book=$b->retrive($id);
                                     <div class="mb-3">
                                         <label>Book Cover</label><br>
                                         <img src="images/<?php echo $book['cover']; ?>" hight=100 width=30% alt="no photo found">
+                                    </div>
+                                    <div class="mb-3">
+                                       
+                                            <?php   
+                                             $id=$book['category_id'];
+                                              $c=new category();
+                                              $result=$c->retrive($id);
+                                              if($result!=null){?>
+                                                <label>Category name</label>
+                                                <p class="form-control">
+                                                 <?php echo $result['name'];?>
+                                                 </p>
+                                            <?php  }?>
+                                                
+                                       
                                     </div>
             
 

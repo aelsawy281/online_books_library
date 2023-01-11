@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "category.php";
 ?>
 
 <!doctype html>
@@ -13,6 +14,7 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title>Book Create</title>
+    
 </head>
 <body>
   
@@ -52,10 +54,32 @@ session_start();
                             <div class="mb-3">
                             <label>Choose a Book File:</label>
                                 <input type="file" name="file" class="form-control">
+                           </div>
+
+
+                            <div class="mb-3">
+                            <label>Choose a Book category:</label>
+                            <select  name="bookcategory" required class="form-control ">
+                                <option value="" >choose book category</option>
+
+                                <?php
+                                $c=new category();
+                                $result=$c->retriveAll();
+                                        foreach($result as $category)
+                                        {
+                                    
+                                            ?>
+                                    <option  value="<?php echo $category['name'];?>"><?php echo $category['name'];?></option>
+                                   <?php }?>
+                               </select>
+                            
                             </div>
+
+
                             <div class="mb-3">
                                 <button type="submit" name="save_book" class="btn btn-primary">Save book</button>
                             </div>
+
 
                         </form>
                     </div>

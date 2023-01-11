@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'book.php';
+include 'category.php';
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -50,7 +51,11 @@ if( $priceErr !="" or  $nameErr !=""){
     header('location:createbook.php');
 }
 else{
-$data=['bookname'=>$name,'price'=>$price,'cover'=>$cover,'pathoffile'=>$file];
+  $bookcategory=$_POST['bookcategory'];
+  $c=new category();
+ $result=$c->retrivebyname($bookcategory);
+ $category_id=$result['id'];
+$data=['bookname'=>$name,'price'=>$price,'cover'=>$cover,'pathoffile'=>$file,'category_id'=>$category_id];
 $b=new Book();
 $b->insert($data);
 header("location:booklist.php");
