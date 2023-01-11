@@ -148,7 +148,9 @@ class DataBase {
              bookname VARCHAR(255) NOT NULL,
              price float NOT NULL,
              cover VARCHAR(255) ,
-             pathoffile VARCHAR(255) 
+             pathoffile VARCHAR(255) ,
+             category_id INT(11) UNSIGNED NOT NULL,
+             FOREIGN KEY (category_id) REFERENCES category(id)
              )";
             $this->runquery($sql);
              //create pivote table
@@ -172,6 +174,13 @@ class DataBase {
         FOREIGN KEY (book_id) REFERENCES book(id)
      )";
      $this->runquery($sql);
+     //create category table
+     $sql = "CREATE TABLE IF NOT EXISTS category (
+      id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      category VARCHAR(255) NOT NULL
+     
+   )";
+   $this->runquery($sql);
    } 
    else {
      echo "Error creating table: " . $this->conn->error;
@@ -186,6 +195,7 @@ class DataBase {
     }
     
 }  
-//  $db=new DataBase('localhost','root','') ;
-//   $db->create_db('ad');
-//   $db->create_table('ad');
+/*
+ $db=new DataBase('localhost','root','') ;
+   $db->create_db('library');
+   $db->create_table('library');*/
