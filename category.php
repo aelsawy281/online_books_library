@@ -3,7 +3,7 @@ include_once 'db.php';
 class Category {
     private $name;
     private $db;
-    private $nameOfDb = "use ad";
+    private $nameOfDb = "use library";
     public function __construct(){
      $this->db=new DataBase('localhost','root','');
    }

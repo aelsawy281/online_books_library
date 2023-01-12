@@ -1,58 +1,49 @@
 <?php
 include_once 'db.php';
-class Promocode {
-    private $code;
-    private $type;
-    private $book_id;
+class Auther {
+    private $name;
     private $db;
     private $nameOfDb = "use library";
     public function __construct(){
      $this->db=new DataBase('localhost','root','');
    }
-   public function generateCode(){
-    $length = 4;
-    $this->code = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWSYZ123456789"), 0, $length);
-    return $this->code;
-   }
-    public function insert($data){
-        $result=1;
-        while($result>0){
-            $code=$data['code']= $this->generateCode();
-            $query = "SELECT * FROM promocode WHERE code = '$code'";
-            if ($this->db->runquery($this->nameOfDb) === TRUE) {
-                $result=$this->db->runqueryforlogin($query);
-                
-        }
-    }
-         $query = "INSERT INTO promocode (";            
+    public function insert($data){ 
+         $query = "INSERT INTO auther (";            
          $query .= implode(",", array_keys($data)) . ') VALUES (';            
          $query .= "'" . implode("','", array_values($data)) . "')";
  
          if ($this->db->runquery($this->nameOfDb) === TRUE) {
            $this->db->runquery($query);
 
+        
                                              }
+
         }
     public function delete($id){
-        $query = "DELETE FROM promocode WHERE id = $id";
+        $query = "DELETE FROM auther WHERE id = $id";
         if ($this->db->runquery($this->nameOfDb) === TRUE) {
             $this->db->runquery($query);
          
                                               }
  
     }
-    public function retrive($code){
-      $query = "SELECT * FROM promocode WHERE code = '$code'";
+    public function retrive($id){
+      $query = "SELECT * FROM auther WHERE id = $id";
       if ($this->db->runquery($this->nameOfDb) === TRUE) {
         $result=$this->db->runqueryforedit($query);
        return $result;
                                             }
 
   }
+  public function retrivebyname($name){
+    $query = "SELECT * FROM auther WHERE name = '$name'";
+    if ($this->db->runquery($this->nameOfDb) === TRUE) {
+      $result=$this->db->runqueryforedit($query);
+     return $result;
+                                          }
+                                        }
   public function retriveAll(){
-    $query = "SELECT promocode.id,code,`type`,`value`,bookname FROM promocode
-    INNER JOIN book
-     ON book.id = promocode.book_id ";
+    $query = "SELECT * FROM auther";
     if ($this->db->runquery($this->nameOfDb) === TRUE) {
       $result=$this->db->runqueryforlist($query);
      return $result;
@@ -62,7 +53,7 @@ class Promocode {
   
     public function update($id,$data){
     foreach($data as $key=>$value){
-        $query="UPDATE book SET $key = '$value'  WHERE id = $id";
+        $query="UPDATE auther SET $key = '$value'  WHERE id = $id";
         if ($this->db->runquery($this->nameOfDb) === TRUE) {
             $this->db->runquery($query);
          
@@ -70,9 +61,13 @@ class Promocode {
  
                                       }
       }
-    }
-/*
-     $p=new Promocode();
-     $data=['type'=>'fixed','value'=>'10'];
-     $p->insert($data);  */
+       
+                                              }
+ /*
+$data=['name'=>'gvgvx'];
+$b=new Auther();
+$b->insert($data);
+//$b->update();
+//$result=$b->retrive(2);
+//print_r($result);*/
 ?>

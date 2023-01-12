@@ -6,7 +6,7 @@ class User{
     private $password;
     private $email;
     private $db;
-    private $nameOfDb = "use ad";
+    private $nameOfDb = "use library";
     public function __construct(){
   
      $this->db=new DataBase('localhost','root','');

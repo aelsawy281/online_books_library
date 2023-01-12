@@ -1,8 +1,10 @@
 <?php
 session_start();
-/*
-if(!isset($_SESSION['email']) or $_SESSION['email']!="admin@gmail.com"){
-head*/
+$id=$_GET['id'];
+$_SESSION['id']=$id;
+include 'auther.php';
+$a=new Auther();
+$auther_edit=$a->retrive($id);
 ?>
 
 <!doctype html>
@@ -15,7 +17,7 @@ head*/
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>category Create</title>
+    <title>Auther Edit</title>
 </head>
 <body>
   
@@ -24,23 +26,30 @@ head*/
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Category Add 
-                            <a href="categorylist.php" class="btn btn-danger float-end">BACK</a>
+                        <h4>Auther Edit 
+                            <a href="autherlist.php" class="btn btn-danger float-end">BACK</a>
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="handelcreatecategory.php" method="POST">
+                        <form action="handeleditauther.php" method="POST">
+                        <div class="mb-3">
+                                <input type="text" hidden name="id" class="form-control" value=<?php echo $id?>>
+                            </div>
 
                             <div class="mb-3">
-                                <label>category Name</label>
-                                <input type="text" name="name" class="form-control">
+                                <label>auther Name</label>
+                                <input type="text" name="name" class="form-control" value="<?php 
+                                
+                                echo $auther_edit['name']?>">
                                 <?php if (isset($_SESSION['nameErr'])){?>
                                     <span class="error">* <?php echo $_SESSION['nameErr'];?></span>
                                <?php }?>
                             </div>
+                            
                             <div class="mb-3">
-                                <button type="submit" name="save_category" class="btn btn-primary">Save Category</button>
+                                <button type="submit" name="update_auther" class="btn btn-primary">Update auther</button>
                             </div>
+
                         </form>
                     </div>
                 </div>

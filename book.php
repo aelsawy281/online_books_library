@@ -6,7 +6,7 @@ class Book {
     private $cover;
     private $path;
     private $db;
-    private $nameOfDb = "use ad";
+    private $nameOfDb = "use library";
     public function __construct(//$bookname, $price,$cover,$path
         ){
     /* $this->bookname=$bookname;

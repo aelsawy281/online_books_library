@@ -4,7 +4,7 @@ class Bookuser {
     private $bookId;
     private $UserId;
     private $db;
-    private $nameOfDb = "use ad";
+    private $nameOfDb = "use library";
     public function __construct(){
      $this->db=new DataBase('localhost','root','');
    }

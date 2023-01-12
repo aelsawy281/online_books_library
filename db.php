@@ -80,10 +80,6 @@ class DataBase {
         if ($this->conn->connect_error) {
           die("Connection failed: " . $this->conn->connect_error);
         }
-
-       /* mysql_select_db($this->database, $this->link)
-            OR die("There was a problem selecting the database.");*/
-
         return true;
     }
 
@@ -142,6 +138,22 @@ class DataBase {
          `password` VARCHAR(255) NOT NULL
           )";
           $this->runquery($sql1);
+
+          //create category table
+     $sql = "CREATE TABLE IF NOT EXISTS category (
+      id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL
+     
+   )";
+   $this->runquery($sql);
+
+   //create auther table
+   $sql = "CREATE TABLE IF NOT EXISTS auther (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+   
+ )";
+ $this->runquery($sql);
         //create book table
         $sql = "CREATE TABLE IF NOT EXISTS `book` (
              id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -150,7 +162,9 @@ class DataBase {
              cover VARCHAR(255) ,
              pathoffile VARCHAR(255) ,
              category_id INT(11) UNSIGNED NOT NULL,
-             FOREIGN KEY (category_id) REFERENCES category(id)
+             auther_id INT(11) UNSIGNED NOT NULL,
+             FOREIGN KEY (category_id) REFERENCES category(id),
+             FOREIGN KEY (auther_id) REFERENCES auther(id)
              )";
             $this->runquery($sql);
              //create pivote table
@@ -158,7 +172,7 @@ class DataBase {
      id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
      user_id INT(11) UNSIGNED NOT NULL,
      book_id INT(11) UNSIGNED NOT NULL,
-     price INT(11) UNSIGNED NOT NULL;
+     price INT(11) UNSIGNED NOT NULL,
      FOREIGN KEY (user_id) REFERENCES user(id),
      FOREIGN KEY (book_id) REFERENCES book(id)
      )";
@@ -174,13 +188,7 @@ class DataBase {
         FOREIGN KEY (book_id) REFERENCES book(id)
      )";
      $this->runquery($sql);
-     //create category table
-     $sql = "CREATE TABLE IF NOT EXISTS category (
-      id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-      category VARCHAR(255) NOT NULL
      
-   )";
-   $this->runquery($sql);
    } 
    else {
      echo "Error creating table: " . $this->conn->error;
@@ -195,7 +203,7 @@ class DataBase {
     }
     
 }  
-/*
+
  $db=new DataBase('localhost','root','') ;
    $db->create_db('library');
-   $db->create_table('library');*/
+   $db->create_table('library');
