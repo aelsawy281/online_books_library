@@ -2,6 +2,7 @@
 session_start();
 include 'book.php';
 include 'category.php';
+include 'auther.php';
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -55,7 +56,11 @@ else{
   $c=new category();
  $result=$c->retrivebyname($bookcategory);
  $category_id=$result['id'];
-$data=['bookname'=>$name,'price'=>$price,'cover'=>$cover,'pathoffile'=>$file,'category_id'=>$category_id];
+ $bookauther=$_POST['bookauther'];
+  $a=new Auther();
+ $result=$a->retrivebyname($bookauther);
+ $auther_id=$result['id'];
+$data=['bookname'=>$name,'price'=>$price,'cover'=>$cover,'pathoffile'=>$file,'category_id'=>$category_id,'auther_id'=>$auther_id];
 $b=new Book();
 $b->insert($data);
 header("location:booklist.php");

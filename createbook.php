@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "category.php";
+include "auther.php";
 ?>
 
 <!doctype html>
@@ -75,6 +76,23 @@ include "category.php";
                             
                             </div>
 
+                            <div class="mb-3">
+                            <label>Choose a Book Auther:</label>
+                            <select  name="bookauther" required class="form-control ">
+                                <option value="" >choose book auther</option>
+
+                                <?php
+                                $a=new Auther();
+                                $result=$a->retriveAll();
+                                        foreach($result as $auther)
+                                        {
+                                    
+                                            ?>
+                                    <option  value="<?php echo $auther['name'];?>"><?php echo $auther['name'];?></option>
+                                   <?php }?>
+                               </select>
+                            
+                            </div>
 
                             <div class="mb-3">
                                 <button type="submit" name="save_book" class="btn btn-primary">Save book</button>

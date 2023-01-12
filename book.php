@@ -51,11 +51,30 @@ class Book {
                                           }
                                         }
   public function retriveAll(){
-    $query = "SELECT * FROM book";
+    $query = "SELECT book.id,book.bookname,book.price,book.cover,category.name as category_name,auther.name as auther_name FROM book
+    INNER JOIN category
+     ON book.category_id = category.id 
+     INNER JOIN auther
+     ON book.auther_id = auther.id" ;
+   
     if ($this->db->runquery($this->nameOfDb) === TRUE) {
       $result=$this->db->runqueryforlist($query);
      return $result;
                                           }
+
+}
+public function retriveBookOfAuther($name){
+  $query = "SELECT book.id,book.bookname,book.price,book.cover,category.name as category_name FROM book
+  INNER JOIN category
+  ON book.category_id = category.id 
+  INNER JOIN auther
+   ON book.auther_id = auther.id
+   where auther.name='$name'" ;
+ 
+  if ($this->db->runquery($this->nameOfDb) === TRUE) {
+    $result=$this->db->runqueryforlist($query);
+   return $result;
+                                        }
 
 }
   

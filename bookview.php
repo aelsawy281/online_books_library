@@ -4,6 +4,7 @@ $id=$_GET['id'];
 $_SESSION['id']=$id;
 include 'book.php';
 include 'category.php';
+include 'auther.php';
 $b=new Book();
 $book=$b->retrive($id);
 ?>
@@ -27,7 +28,7 @@ $book=$b->retrive($id);
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Book View Details 
+                        <h4>Book Details 
                             <a href="booklist.php" class="btn btn-danger float-end">BACK</a>
                         </h4>
                     </div>
@@ -52,9 +53,9 @@ $book=$b->retrive($id);
                                     <div class="mb-3">
                                        
                                             <?php   
-                                             $id=$book['category_id'];
+                                             $category_id=$book['category_id'];
                                               $c=new category();
-                                              $result=$c->retrive($id);
+                                              $result=$c->retrive($category_id);
                                               if($result!=null){?>
                                                 <label>Category name</label>
                                                 <p class="form-control">
@@ -65,7 +66,21 @@ $book=$b->retrive($id);
                                        
                                     </div>
             
-
+                                    <div class="mb-3">
+                                       
+                                       <?php   
+                                        $auther_id=$book['auther_id'];
+                                         $a=new Auther();
+                                         $result=$c->retrive($auther_id);
+                                         if($result!=null){?>
+                                           <label>Auther name</label>
+                                           <p class="form-control">
+                                            <?php echo $result['name'];?>
+                                            </p>
+                                       <?php  }?>
+                                           
+                                  
+                               </div>
                           
                     </div>
                 </div>
