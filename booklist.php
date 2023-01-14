@@ -3,20 +3,16 @@
     include 'book.php';
     $b=new book();
    $result=$b->retriveAll();
-?>
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   include "header.php"?>
 
     <title>Book CRUD</title>
-</head>
-<body>
+<?php 
+include "navbar.php";
+include "search.php";
+?>
+ </div>
+  </div>
+</nav> 
   
     <div class="container mt-4">
         <div class="row">
@@ -75,8 +71,6 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+    <?php
+    include "footer.php"
+    ?>

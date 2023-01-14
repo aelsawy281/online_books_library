@@ -1,22 +1,18 @@
 <?php
 include_once 'db.php';
-class Book {
-    private $bookname;
-    private $price;
-    private $cover;
-    private $path;
+class Comment {
+    private $comment;
+    private $user_id;
+    private $book_id;
     private $db;
     private $nameOfDb = "use library";
-    public function __construct(//$bookname, $price,$cover,$path
+    public function __construct(
         ){
-    /* $this->bookname=$bookname;
-     $this->price=$price;
-     $this->cover=$cover;
-     $this->path=$path;*/
+ 
      $this->db=new DataBase('localhost','root','');
    }
     public function insert($data){ 
-         $query = "INSERT INTO book (";            
+         $query = "INSERT INTO comment (";            
          $query .= implode(",", array_keys($data)) . ') VALUES (';            
          $query .= "'" . implode("','", array_values($data)) . "')";
  
@@ -28,7 +24,7 @@ class Book {
 
         }
     public function delete($id){
-        $query = "DELETE FROM book WHERE id = $id";
+        $query = "DELETE FROM Comment WHERE id = $id";
         if ($this->db->runquery($this->nameOfDb) === TRUE) {
             $this->db->runquery($query);
          
@@ -36,7 +32,7 @@ class Book {
  
     }
     public function retrive($id){
-      $query = "SELECT * FROM book WHERE id = $id";
+      $query = "SELECT * FROM comment WHERE id = $id";
       if ($this->db->runquery($this->nameOfDb) === TRUE) {
         $result=$this->db->runqueryforedit($query);
        return $result;
@@ -44,18 +40,19 @@ class Book {
 
   }
   public function retrivebyname($name){
-    $query = "SELECT * FROM book WHERE bookname = '$name'";
+    $query = "SELECT * FROM comment WHERE comment= '$name'";
     if ($this->db->runquery($this->nameOfDb) === TRUE) {
       $result=$this->db->runqueryforedit($query);
      return $result;
                                           }
                                         }
-  public function retriveAll(){
-    $query = "SELECT book.id,book.bookname,book.price,book.cover,category.name as category_name,auther.name as auther_name FROM book
-    INNER JOIN category
-     ON book.category_id = category.id 
-     INNER JOIN auther
-     ON book.auther_id = auther.id" ;
+  public function retriveAll($name){
+    $query = "SELECT book.bookname,user.firstname,user.lastname,comment FROM comment
+    INNER JOIN book
+     ON comment.book_id = book.id 
+     INNER JOIN user
+     ON comment.user_id = user.id
+     where book.bookname='$name'" ;
    
     if ($this->db->runquery($this->nameOfDb) === TRUE) {
       $result=$this->db->runqueryforlist($query);

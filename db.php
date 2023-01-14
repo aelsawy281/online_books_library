@@ -188,7 +188,27 @@ class DataBase {
         FOREIGN KEY (book_id) REFERENCES book(id)
      )";
      $this->runquery($sql);
-     
+            //create comment table
+            $sql = "CREATE TABLE IF NOT EXISTS comment (
+              id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+              user_id INT(11) UNSIGNED NOT NULL,
+              book_id INT(11) UNSIGNED NOT NULL,
+              comment VARCHAR(255) NOT NULL,
+              FOREIGN KEY (user_id) REFERENCES user(id),
+              FOREIGN KEY (book_id) REFERENCES book(id)
+              )";
+     $this->runquery($sql);
+
+       //create rate table
+       $sql = "CREATE TABLE IF NOT EXISTS rate (
+        id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        user_id INT(11) UNSIGNED NOT NULL,
+        book_id INT(11) UNSIGNED NOT NULL,
+        rate INT(1) UNSIGNED NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES user(id),
+        FOREIGN KEY (book_id) REFERENCES book(id)
+        )";
+$this->runquery($sql);
    } 
    else {
      echo "Error creating table: " . $this->conn->error;

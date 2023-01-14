@@ -57,14 +57,18 @@
                              <?php
                             $bookUser=new Bookuser();
                            $result=$bookUser->retrive($userId,$book['id']);
-                        if(isset($result['book_id'])){?>
-                        <input type="submit" class="btn btn-danger" value="you bought this book">
+                        if(!isset($result['book_id'])){?>
+                        <input type="submit" name="buy" class="btn btn-primary" value="Buy Now">
+                        </form>
                       <?php }
                       else{
-                       ?> <input type="submit" name="buy" class="btn btn-primary" value="Buy Now">
-                     <?php }
                        ?>
                        </form>
+                        <a class="mb-3 btn btn-danger" href="addcommentandrate.php?id=<?php echo $book['id'].'&bookname='.$book['bookname'];?>" >you bought this book</a>
+                      
+                     <?php }
+                       ?>
+                       
                        
                        
                          

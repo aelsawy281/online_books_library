@@ -68,8 +68,7 @@ class Bookuser {
   
     }
     public function countusers(){
-      $query = "SELECT count(DISTINCT(user_id)) as countusers FROM book_user
-      group by user_id";
+      $query = "SELECT count(DISTINCT(user_id)) as countusers FROM book_user";
       if ($this->db->runquery($this->nameOfDb) === TRUE) {
         $result=$this->db->runqueryforedit($query);
        return $result;
