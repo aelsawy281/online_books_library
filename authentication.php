@@ -22,7 +22,7 @@ public function login($data){
     //$password= password_hash(12345,PASSWORD_DEFAULT);
 
     if(isset($data['email']) and isset($data['password'])){
-        echo $data['email'];
+       // echo $data['email'];
         $password=$data['password'];
         $email=$data['email'];
         $query="SELECT * FROM user WHERE email='$email' and password='$password'";

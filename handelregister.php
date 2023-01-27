@@ -36,24 +36,29 @@ if (isset($_POST['save_user'])){
   if ($_POST["password"] == $_POST["psw-repeat"]) {
     $password = test_input($_POST["password"]);
         $_SESSION['password']=$password;
+    
   } else {
     $passwordErr="password is not the same as confirm password";
     $_SESSION['passwordErr']=$passwordErr;
 }
 
-
 }
 
-if( $fnameErr !="" or$passwordErr !="" or  $lnameErr !=""){
+
+if( $fnameErr !="" or $passwordErr !="" or  $lnameErr !="" or $emailErr){
+   
     header('location:register.php');
 }
+
 
 else{
 $data=['firstname'=>$fname,'lastname'=>$lname,'email'=>$email,'password'=>$password];
 $a=new Authentication();
-$result=$a->login($data['email']);
-if($result>0){
-    $result=$a->register($data);
+$data1=['email'=>$email,'password'=>$password];
+$result=$a->login($data1);
+ var_dump($result);
+if($result == 0){
+      $a->register($data);
     header("location:login.php");}
 else{
    $error="your email is aready exist";
@@ -61,4 +66,5 @@ else{
    header ("location:register.php");
 }
 }
+
 ?>
